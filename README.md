@@ -1,6 +1,8 @@
 # Level One
 
-## Requirements
+## Instructions
+run `npm install` first time
+run `npm start` to start
 
 ## Directory Structure
 ```
