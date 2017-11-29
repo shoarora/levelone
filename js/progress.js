@@ -57,14 +57,14 @@ function initMountains() {
         var curStartHeight = startHeight;
         var img_path = 'img/cur_mountain.png'
         if (i < 2) {
-            startX -= (2 - i) * center;
-            curStartWidth -= (2 - i) * center  / 2;
-            curStartHeight -= (2 - i) * center  / 2;
+            startX -= (2 - i) * center * 3 / 4;
+            curStartWidth -= (2 - i) * center * 3 / 4 / 2;
+            curStartHeight -= (2 - i) * center * 3 / 4 / 2;
             img_path = 'img/done_mountain.png'
         } else if (i > 2) {
-            startX += (i - 2) * center;
-            curStartWidth += (i - 2) * center / 2;
-            curStartHeight += (i - 2) * center  / 2;
+            startX += (i - 2) * center * 3 / 4;
+            curStartWidth += (i - 2) * center * 3 / 4 / 2;
+            curStartHeight += (i - 2) * center * 3 / 4 / 2;
             img_path = 'img/locked_mountain.png'
         }
 
@@ -79,14 +79,29 @@ function initMountains() {
     }
 }
 
+function initLabels() {
+    var labelContainer = document.getElementById("level-labels");
+    labelContainer.innerHTML = '';
+    const labelIds = ['prev-level', 'cur-level', 'next-level'];
+    for (let i=0; i < 3; i++) {
+        var label = document.createElement("p");
+        label.id = labelIds[i];
+        var text = document.createTextNode("Level " + (cur_index+i).toString());
+        label.appendChild(text);
+        labelContainer.appendChild(label);
+    }
+}
+
 function setup() {
     const mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
     const size = mainWindow.getSize();
     console.log(size);
     canvasWidth = size[0];
     canvasHeight = size[1] - headerSize - footerSize;
-    createCanvas(canvasWidth, canvasHeight);
+    var canvas = createCanvas(canvasWidth, canvasHeight);
+    canvas.parent('canvas-container');
     initMountains();
+    initLabels();
 }
 
 var continueAnimation = false;
@@ -133,6 +148,7 @@ function draw() {
             //     }
             //     mountains[i].setX(newX);
             // }
+            initLabels();
             console.log('new index', cur_index);
         }
     }
@@ -144,12 +160,16 @@ document.addEventListener('keydown', event => {
         if (cur_index < mountains.length-1) {
             animationDirection = -1;
             continueAnimation = true;
+            var labels = document.getElementById('level-labels');
+            labels.innerHTML = '';
         }
     } else if (event.key === 'k') {
         console.log(event.key);
         if (cur_index > 0) {
             animationDirection = 1;
             continueAnimation = true;
+            var labels = document.getElementById('level-labels');
+            labels.innerHTML = '';
         }
     }
 });

@@ -1,6 +1,15 @@
 <html>
     <head>
         <title>Progress</title>
+        <style>
+            #level-labels {
+                display: flex;
+                justify-content: space-around;
+                color: cyan;
+                font-size: 35;
+                font-family: sans-serif;
+            }
+        </style>
     </head>
     <body class='progress' style='background-image: url("img/mountain2.png")'>
         <h1>Your Progress</h1>
@@ -15,6 +24,9 @@
                 Total workouts: 30
             </p>
         </div>
+        <div id='canvas-container'>
+
+        </div>
         <script>
             require('./js/p5/p5.min.js')
             const p5 = require('./js/progress.js');
@@ -22,5 +34,8 @@
             var setup = p5.setup;
             var draw = p5.draw;
         </script>
+        <div id='level-labels'>
+
+        </div>
     </body>
 </html>
