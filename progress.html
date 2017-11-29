@@ -1,10 +1,26 @@
-<h1>progress!</h1>
-<script>
-    require('./js/p5/p5.min.js')
-</script>
-<script>
-    const p5 = require('./js/progress.js');
+<html>
+    <head>
+        <title>Progress</title>
+    </head>
+    <body class='progress' style='background-image: url("img/mountain2.png")'>
+        <h1>Your Progress</h1>
+        <div id='quick-stats'>
+            <p>
+                Hours worked out: 30
+            </p>
+            <p>
+                Days without a break: 5
+            </p>
+            <p>
+                Total workouts: 30
+            </p>
+        </div>
+        <script>
+            require('./js/p5/p5.min.js')
+            const p5 = require('./js/progress.js');
 
-    var setup = p5.setup;
-    var draw = p5.draw;
-</script>
+            var setup = p5.setup;
+            var draw = p5.draw;
+        </script>
+    </body>
+</html>

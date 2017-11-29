@@ -15,3 +15,11 @@ root
     - main.js         // the main file that runs
     - progress.html
 ```
+
+
+## Midway Milestone Todos
+-   maintain array of mountains for levels and have them cascade
+-   scroll on command
+-   show details
+-   better styling
+-   do we need another chart?
