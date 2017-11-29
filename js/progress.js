@@ -57,14 +57,14 @@ function initMountains() {
         var curStartHeight = startHeight;
         var img_path = 'img/cur_mountain.png'
         if (i < 2) {
-            startX -= (2 - i) * center;
-            curStartWidth -= (2 - i) * center  / 2;
-            curStartHeight -= (2 - i) * center  / 2;
+            startX -= (2 - i) * center * 3 / 4;
+            curStartWidth -= (2 - i) * center * 3 / 4 / 2;
+            curStartHeight -= (2 - i) * center * 3 / 4 / 2;
             img_path = 'img/done_mountain.png'
         } else if (i > 2) {
             startX += (i - 2) * center;
-            curStartWidth += (i - 2) * center / 2;
-            curStartHeight += (i - 2) * center  / 2;
+            curStartWidth += (i - 2) * center * 3 / 4 / 2;
+            curStartHeight += (i - 2) * center * 3 / 4 / 2;
             img_path = 'img/locked_mountain.png'
         }
 
