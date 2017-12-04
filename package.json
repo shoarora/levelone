@@ -20,6 +20,7 @@
     "electron": "~1.7.8"
   },
   "dependencies": {
+    "play-sound": "^1.1.1",
     "request": "^2.83.0"
   }
 }

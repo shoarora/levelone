@@ -2,7 +2,7 @@ const electron = require('electron');
 const request = require('request');
 const url = require('url');
 const path = require('path');
-
+const player = require('play-sound')(opts = {});
 
 var mainWindow;
 var canvasWidth;
@@ -40,14 +40,17 @@ class Compliment {
         this.x = this.randomInt(200, 500);
         this.y = this.randomInt(200, 500);
         this.animate = false;
-        this.rgba = [];  // TODO set font
+        this.alpha = 255;
     }
     render() {
         if (this.animate) {
-            // TODO change rgba
             this.y -= 7;
+            this.alpha -= 15;
         }
-        // fill.apply(null, this.rgba);
+        // fill(255, 255, 255, this.alpha);
+        fill(247, 138, 38, this.alpha);
+        textFont('sans-serif');
+        textSize(30);
         text(this.text, this.x, this.y);
     }
 }
@@ -83,7 +86,7 @@ class Challenge {
                     if (body.player1State === 0) {
                         // 1 rep completed
                         self.player1.repsLeft--;
-                        if (Math.random() > 0.3) {
+                        if (Math.random() > 0.0) {
                             // give user a compliment
                             self.player1.compliment = new Compliment();
                             setTimeout(function() {
@@ -128,18 +131,18 @@ class Challenge {
         }
     }
     renderNumReps() {
-        // TODO set font
-        // textFont('sans-serif');
-        // textSize(50);
-        // fill(245, 245, 245);
-        text(this.numReps.toString(), 535, 180);
+        textFont('sans-serif');
+        textSize(64);
+        textStyle('BOLD');
+        fill(0, 170, 235);
+        text(this.numReps.toString(), 515, 195);
     }
     renderTimeLeft() {
-        // TODO set font
-        // textFont('sans-serif');
-        // textSize(50);
-        // fill(245, 245, 245);
-        text(this.timeLeftInMinutes(), 535, 300);
+        textFont('sans-serif');
+        textSize(42);
+        textStyle('BOLD');
+        fill(0, 170, 235);
+        text(this.timeLeftInMinutes(), 595, 290);
     }
     renderProgressBars() {
         // Player 1
@@ -147,58 +150,68 @@ class Challenge {
         var barWidth = 135;
 
         var barHeight = barMaxHeight * (1 - this.player1.repsLeft / this.numReps);
-        // fill(245, 245, 245,); TODO set fill color
+        fill(247, 138, 38);
         rect(107, 772 - barHeight, barWidth, barHeight);
 
-        // TODO set label
-        // textFont('sans-serif');
-        // textSize(50);
-        // fill(245, 245, 245);
-        text(this.player1.repsLeft, 120, 45);
+        textFont('sans-serif');
+        textSize(50);
+        textStyle('BOLD');
+        fill(255, 255, 255);
+        text(this.player1.repsLeft, 145, 90);
 
         // Player 2
         barHeight = barMaxHeight * (1 - this.player2.repsLeft / this.numReps);
-        // fill(245, 245, 245,); TODO set fill color
+        fill(247, 138, 38);
         rect(1027, 775 - barHeight, barWidth, barHeight);
 
-        // TODO set label
-        // textFont('sans-serif');
-        // textSize(50);
-        // fill(245, 245, 245);
-        text(this.player2.repsLeft, 1040, 45);
+        textFont('sans-serif');
+        textSize(50);
+        textStyle('BOLD');
+        fill(255, 255, 255);
+        text(this.player2.repsLeft, 1066, 92);
     }
     renderSprites() {
-        // TODO set positions and load images
         image(this.ground, 0, 624, 1277, 150);
 
         var player1Sprite = this.player1.sprites[this.player1.state];
         if (player1Sprite) {
             image(player1Sprite, 180, 350, 400, 400);
         }
-        text(this.player1.name, 200, 450);
+        fill(63, 34, 48);
+        textSize(15);
+        textFont('sans-serif');
+        text(this.player1.name, 270, 330);
 
         var player2Sprite = this.player2.sprites[this.player2.state];
         if (player2Sprite) {
             image(player2Sprite, 700, 350, 400, 400);
         }
-        text(this.player2.name, 200, 450);
+        text(this.player2.name, 940, 330);
 
         if (this.player1.compliment !== null) {
             this.player1.compliment.render();
         }
     }
     renderPoints() {
-        // TODO font and placement
-        // textFont('sans-serif');
-        // textSize(50);
-        // fill(245, 245, 245);
-        text(this.player1.points, 120, 700);
-        text(this.player1.points, 1040, 700);
+        textFont('sans-serif');
+        textSize(35);
+        fill(255, 255, 255);
+        var adjustment1 = 0;
+        var adjustment2 = 0;
+        if (this.player1.points > 9) {
+            adjustment1 += 15;
+        }
+        if (this.player2.points > 9) {
+            adjustment2 += 15;
+        }
+        text(this.player1.points, 220 + adjustment1, 720);
+        text(this.player1.points, 1150 + adjustment2, 720);
     }
 }
 
 function setup() {
     mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
+    console.log(electron.remote.getGlobal('sharedObj').stage);
     const size = mainWindow.getSize();
     console.log(size);
     canvasWidth = size[0];
@@ -213,13 +226,19 @@ function setup() {
         'Squatch',
         20,
         120
-    );  //TODO
+    );
 
     function runTimer() {
         challenge.timeLeft--;
         challenge.needsRender = true;
     }
     setInterval(runTimer, 1000);
+    // var audio = player.play('foo.mp3', function(err) {
+    //     if (err && !err.killed) throw err;
+    // });
+    // setTimeout(function() {
+    //     audio.kill();
+    // }, 10000);
 }
 
 var firstTime = true;
