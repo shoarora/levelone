@@ -22,7 +22,7 @@ class Player {
         var self = this;
         for (let i=0; i < 3; i++) {
             let j = i;
-            loadImage(path.join('../img', type, 'sprites', sprite, i.toString()+'.png'), function(img) {
+            loadImage(path.join('img', type, 'sprites', sprite, i.toString()+'.png'), function(img) {
                 self.sprites[j] = img;
             });
         }
@@ -65,7 +65,7 @@ class Challenge {
         this.needsRender = false;
         this.requestInProgress = false;
 
-        this.ground = loadImage(path.join('../img', type, 'ground.png'));
+        this.ground = loadImage(path.join('img', type, 'ground.png'));
     }
     timeLeftInMinutes() {
         var min = Math.floor(this.timeLeft / 60);
@@ -207,6 +207,21 @@ class Challenge {
         text(this.player1.points, 220 + adjustment1, 720);
         text(this.player1.points, 1150 + adjustment2, 720);
     }
+    end() {
+        var nextPage;
+        if (this.player1.points > this.player2.points) {
+            nextPage = 'win.html';
+        } else if (this.player1.points < this.player2.points) {
+            nextPage = 'lose.html';
+        } else {
+            nextPage = 'tie.html';
+        }
+        mainWindow.loadURL(url.format({
+            pathname: path.join(__dirname, '..', nextPage),
+            protocol: 'file:',
+            slashes: true
+        }));
+    }
 }
 
 function setup() {
@@ -259,6 +274,10 @@ function draw() {
     if (challenge.needsRender) {
         clear();
         challenge.renderScreen();
+    }
+
+    if (challenge.timeLeft === 0) {
+        challenge.end();
     }
 }
 
