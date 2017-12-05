@@ -13,7 +13,6 @@ var stage;
 function setup() {
     mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
     stage = electron.remote.getGlobal('sharedObj').stage;
-    electron.remote.getGlobal('sharedObj').stage = 2;
     console.log(electron.remote.getGlobal('sharedObj').stage);
     const size = mainWindow.getSize();
     console.log(size);
