@@ -22,27 +22,7 @@ function setup() {
 }
 
 function draw() {
-    if (needsRender) {
-        clear();
-        fill(255, 255, 255);
-        textSize(48);
-        textStyle('BOLD');
-        var adjustment = 0;
-        if (numReps < 10) {
-            adjustment = 13;
-        }
-        text(numReps, 686 + adjustment, 576);
 
-        // TODO
-        // draw boxes
-
-        noFill();
-        stroke(255, 255, 255);
-        strokeWeight(4);
-        rect(450, 518, 379, 86);
-
-        needsRender = false;
-    }
 }
 
 document.addEventListener('keydown', event => {
