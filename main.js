@@ -18,11 +18,11 @@ function createWindow () {
   // mainWindow.maximize();
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, 'stage0', 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
-  global.sharedObj = {'mainWindow': mainWindow, 'stage': 0};
+  global.sharedObj = {'mainWindow': mainWindow, 'stage': 0, 'numReps': 10};
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 

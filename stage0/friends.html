@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Friends</title>
+        <style>
+            body {
+                height: 774px;
+                width: 1280px;
+                background-image: url("img/FriendMenuBlank.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                margin: 0;
+            }
+            #menu-buttons {
+                margin-top: 90px;
+                margin-right: 35px;
+                padding: 40px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 270;
+                width: 370px;
+                float: right;
+            }
+            div#menu-buttons a {
+                font-size: 40px;
+                text-decoration: none;
+                font-family: sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='menu-buttons'>
+            <a href="find-friends.html">Find Friends</a>
+            <a href="leaderboard.html">Leaderboard</a>
+            <a href="friend-requests.html">Friend Requests (0)</a>
+            <a href="messages.html">Messages</a>
+        </div>
+        <script>
+            const friends = require('./js/friends.js');
+            friends.main();
+        </script>
+    </body>
+</html>

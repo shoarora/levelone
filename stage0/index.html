@@ -8,46 +8,47 @@
         body {
             height: 774px;
             width: 1280px;
-            background-image: url("img/HomeBG2.png");
+            background-image: url("img/HomeBlank.png");
             background-size: contain;
             background-repeat: no-repeat;
         }
         #menu-buttons {
-            margin-top: 100px;
-            margin-right: 50px;
-            border-radius: 50px;
+            margin-top: 90px;
+            margin-right: 55px;
             padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 400px;
-            width: 300px;
+            height: 300px;
+            width: 370px;
             float: right;
-            background-color: rgba(0, 0, 0, 0.1);
         }
         div#menu-buttons a {
             font-size: 45px;
-            border-radius: 50px;
-            background-color: rgb(239, 96, 148);
-            color: rgb(245, 245, 245);
             text-decoration: none;
-            text-align: center;
             font-family: sans-serif;
         }
         div#menu-buttons a:hover {
-            background-color: rgb(239, 45, 148);
+
+        }
+        a span {
+            font-size: 20px;
         }
     </style>
 </head>
 
 <body>
     <div id='menu-buttons'>
-        <a href="select-workout.html">Workout</a>
+        <a href="select-workout.html">Solo Workout</a>
         <a href="">Multiplayer</a>
         <a href="friends.html">Friends</a>
-        <!-- <a href="">Items</a> -->
         <a href="progress.html">Progress</a>
+        <a href="">Items <span>(Coming Soon!)</span></a>
     </div>
+    <script>
+        const index = require('./js/index.js');
+        index.main();
+    </script>
 </body>
 
 </html>

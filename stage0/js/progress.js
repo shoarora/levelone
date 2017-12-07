@@ -55,6 +55,7 @@ var canvasHeight;
 var canvasWidth;
 var cur_index = 2;
 var mainWindow;
+var stage;
 
 function initMountains() {
     var startWidth = 300;
@@ -118,6 +119,7 @@ function initLabels() {
 
 function setup() {
     mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
+    stage = electron.remote.getGlobal('sharedObj').stage;
     const size = mainWindow.getSize();
     console.log(size);
     canvasWidth = size[0];
