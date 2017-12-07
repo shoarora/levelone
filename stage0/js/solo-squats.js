@@ -64,6 +64,7 @@ class Challenge {
         this.timeLeft = timeLimit;
         this.needsRender = false;
         this.requestInProgress = false;
+        this.countdown = 5;
 
         this.ground = loadImage(path.join('img', type, 'ground.png'));
     }
@@ -110,18 +111,15 @@ class Challenge {
                     self.needsRender = true;
                     console.log('p2 state changed');
                 }
-
-                if (this.timeLeft === 1 ||
-                    this.player1.repsLeft === 1 ||
-                    this.player2.repsLeft === 1) {
-                    this.end();
-                }
-
-                self.requestInProgress = false;
             } else {
                 console.log('error fetching state');
-                self.requestInProgress = false;
             }
+            if (this.timeLeft === 1 ||
+                this.player1.repsLeft === 1 ||
+                this.player2.repsLeft === 1) {
+                this.end();
+            }
+            self.requestInProgress = false;
         });
     }
     renderScreen() {
@@ -131,6 +129,11 @@ class Challenge {
         this.renderProgressBars();
         this.renderSprites();
         this.renderPoints();
+
+        if (this.countdown > 0) {
+            this.renderCountdown();
+        }
+
         if (this.player1.compliment === null) {
             console.log('done animating');
             this.needsRender = false;
@@ -213,6 +216,14 @@ class Challenge {
         text(this.player1.points, 220 + adjustment1, 720);
         text(this.player1.points, 1150 + adjustment2, 720);
     }
+    renderCountdown() {
+        fill(255, 255, 255, 220);
+        rect(0, 0, canvasWidth, canvasHeight);
+
+        fill(0, 170, 235);
+        textSize(130);
+        text(this.countdown, canvasWidth/2 - textWidth(this.countdown)/2, canvasHeight/2);
+    }
     end() {
         var nextPage;
         if (this.player1.points > this.player2.points) {
@@ -250,7 +261,11 @@ function setup() {
     );
 
     function runTimer() {
-        challenge.timeLeft--;
+        if (challenge.countdown > 0) {
+            challenge.countdown--;
+        } else {
+            challenge.timeLeft--;
+        }
         challenge.needsRender = true;
     }
     setInterval(runTimer, 1000);
@@ -265,7 +280,7 @@ function setup() {
 var firstTime = true;
 
 function draw() {
-    if (!challenge.requestInProgress) {
+    if (challenge.countdown <= 0 && !challenge.requestInProgress) {
         if (firstTime) {
             console.log('fetching 1st state');
             challenge.requestInProgress = true;
