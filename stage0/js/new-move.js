@@ -12,7 +12,6 @@ var stage;
 
 function setup() {
     mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
-    electron.remote.getGlobal('sharedObj').stage++;
     stage = electron.remote.getGlobal('sharedObj').stage;
     console.log(electron.remote.getGlobal('sharedObj').stage);
     const size = mainWindow.getSize();
@@ -33,7 +32,6 @@ document.addEventListener('keydown', event => {
         protocol: 'file:',
         slashes: true
     }));
-
 });
 
 exports.setup = setup;

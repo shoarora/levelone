@@ -29,7 +29,7 @@ function draw() {
 
 document.addEventListener('keydown', event => {
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, './level-up.html'),
+        pathname: path.join(__dirname, '../level-up.html'),
         protocol: 'file:',
         slashes: true
     }));

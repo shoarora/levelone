@@ -111,6 +111,12 @@ class Challenge {
                     console.log('p2 state changed');
                 }
 
+                if (this.timeLeft === 1 ||
+                    this.player1.repsLeft === 1 ||
+                    this.player2.repsLeft === 1) {
+                    this.end();
+                }
+
                 self.requestInProgress = false;
             } else {
                 console.log('error fetching state');
@@ -214,7 +220,7 @@ class Challenge {
         } else if (this.player1.points < this.player2.points) {
             nextPage = 'lose.html';
         } else {
-            nextPage = 'tie.html';
+            nextPage = 'win.html';
         }
         mainWindow.loadURL(url.format({
             pathname: path.join(__dirname, '..', nextPage),
@@ -239,8 +245,8 @@ function setup() {
         'green',
         'You',
         'Squatch',
-        20,
-        120
+        5,
+        5
     );
 
     function runTimer() {
@@ -274,10 +280,6 @@ function draw() {
     if (challenge.needsRender) {
         clear();
         challenge.renderScreen();
-    }
-
-    if (challenge.timeLeft === 0) {
-        challenge.end();
     }
 }
 

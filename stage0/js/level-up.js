@@ -12,7 +12,6 @@ var stage;
 
 function setup() {
     mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
-    electron.remote.getGlobal('sharedObj').stage++;
     stage = electron.remote.getGlobal('sharedObj').stage;
     console.log(electron.remote.getGlobal('sharedObj').stage);
     const size = mainWindow.getSize();
@@ -29,7 +28,7 @@ function draw() {
 
 document.addEventListener('keydown', event => {
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, './new-move.html'),
+        pathname: path.join(__dirname, '../new-move.html'),
         protocol: 'file:',
         slashes: true
     }));

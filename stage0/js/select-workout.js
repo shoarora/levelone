@@ -26,8 +26,8 @@ function draw() {
     if (needsRender) {
         clear();
         fill(255, 255, 255);
+        strokeWeight(1);
         textSize(48);
-        textStyle('BOLD');
         var adjustment = 0;
         if (numReps < 10) {
             adjustment = 13;
@@ -39,11 +39,14 @@ function draw() {
         strokeWeight(4);
         rect(450, 518, 379, 86);
 
+        rect(270, 190, 140, 140);
+
         needsRender = false;
     }
 }
 
 document.addEventListener('keydown', event => {
+    console.log(event.key, event.keyCode);
     if (event.keyCode === 37 && numReps > 1) {
         numReps--;
         needsRender = true;
