@@ -28,5 +28,5 @@ def update_p1_score():
 
 
 if __name__ == "__main__":
-    thread.start_new_thread(app.run, ())
+    thread.start_new_thread(app.run, (), {'host': '0.0.0.0'})
     update_p1_score()

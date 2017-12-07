@@ -22,7 +22,7 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
-  global.sharedObj = {'mainWindow': mainWindow, 'stage': 0};
+  global.sharedObj = {'mainWindow': mainWindow, 'stage': 0, 'numReps': 10};
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
