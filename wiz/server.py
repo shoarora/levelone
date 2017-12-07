@@ -19,18 +19,9 @@ def get_game_state():
     return json.dumps(response)
 
 
-def update_p1_score():
-    while True:
-        new_val = int(raw_input())
-        if new_val < 0.4:
-            new_val = 0
-        elif new_val < 0.7:
-            new_val = 1
-        elif new_val < 1.3:
-            new_val = 2
-        response['player1State'] = new_val
-        response['player2State'] = new_val
-        print response
+@app.route('/update/<p1>')
+def update_p1_score(p1):
+    response['player1State'] = int(p1)
 
 
 if __name__ == "__main__":
