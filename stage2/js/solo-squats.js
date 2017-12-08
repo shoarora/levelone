@@ -28,7 +28,7 @@ function setup() {
         'pink',
         'yeti',
         'You',
-        'Squatch',
+        'Yetti',
         electron.remote.getGlobal('sharedObj').numReps,
         45,
         canvasWidth,
