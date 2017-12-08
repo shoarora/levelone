@@ -6,7 +6,8 @@ const path = require('path');
 var selectionAvailable = false;
 var selectionSet = !selectionAvailable;
 var selection = 0;
-var numReps = 20;
+var highlightSuggested = false;
+var numReps = 8;
 var needsRender = true;
 var mainWindow;
 var canvasHeight;
@@ -45,7 +46,11 @@ function drawReps() {
         noFill();
         stroke(239, 103, 148);
         strokeWeight(4);
-        rect(450, 518, 379, 86);
+        if (!highlightSuggested) {
+            rect(450, 518, 379, 86);
+        } else {
+            rect(536, 610, 204, 36);
+        }
     }
 
     fill(255, 255, 255);
@@ -80,6 +85,18 @@ document.addEventListener('keydown', event => {
             needsRender = true;
         }
     }
+    if (event.key === 'w') {
+        if (selectionSet) {
+            highlightSuggested = false;
+            needsRender = true;
+        }
+    }
+    if (event.key === 's') {
+        if (selectionSet) {
+            highlightSuggested = true;
+            needsRender = true;
+        }
+    }
     if (event.key === 'd') {
         if (!selectionSet && selection === 0) {
             selection = 1;
@@ -94,6 +111,9 @@ document.addEventListener('keydown', event => {
             selectionSet = true;
             needsRender = true;
         } else {
+            if (highlightSuggested) {
+                numReps = 8;
+            }
             electron.remote.getGlobal('sharedObj').numReps = numReps;
             mainWindow.loadURL(url.format({
                 pathname: path.join(__dirname, '../solo-squats.html'),
