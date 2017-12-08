@@ -129,7 +129,7 @@ document.addEventListener('keydown', event => {
         }
     }
     if (event.key === 'k') {
-        if (selectionAvailable) {
+        if (selectionAvailable && selectionSet) {
             selectionSet = false;
             needsRender = true;
         } else {

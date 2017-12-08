@@ -66,7 +66,7 @@ document.addEventListener('keydown', event => {
         buttonIndex--;
         needsRender = true;
     }
-    if (event.key === 's' && profileIndex === 1) {
+    if (event.key === 'w' && profileIndex === 1) {
         profileIndex--;
         needsRender = true;
     }
@@ -74,7 +74,7 @@ document.addEventListener('keydown', event => {
         buttonIndex++;
         needsRender = true;
     }
-    if (event.key === 'w' && profileIndex === 0) {
+    if (event.key === 's' && profileIndex === 0) {
         profileIndex++;
         needsRender = true;
     }

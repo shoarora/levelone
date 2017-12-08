@@ -28,7 +28,7 @@ function setup() {
         'pink',
         'green',
         'You',
-        'Squatch',
+        'Edmund19',
         electron.remote.getGlobal('sharedObj').numReps,
         45,
         canvasWidth,

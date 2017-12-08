@@ -260,7 +260,7 @@ class Challenge {
         text(this.countdown, this.canvasWidth/2 - textWidth(this.countdown)/2, this.canvasHeight/2);
     }
     end() {
-        var nextPage;
+        var nextPage = '';
         if (!this.isSolo) {
             nextPage = 'multi';
         }

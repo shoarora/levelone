@@ -37,6 +37,7 @@ function main() {
             }));
         }
         if (event.key === 'k') {
+            var mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
             mainWindow.loadURL(url.format({
                 pathname: path.join(__dirname, '..', 'index.html'),
                 protocol: 'file:',

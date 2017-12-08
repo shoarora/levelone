@@ -27,7 +27,7 @@ function main() {
         if (event.key === 'w' && index > 0) {
             index--;
         }
-        if (event.key === 'j') {
+        if (event.key === 'j' && index !== 4) {
             var mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
             var pathToLoad = div.children[index].getAttribute('href');
             mainWindow.loadURL(url.format({

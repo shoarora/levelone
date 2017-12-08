@@ -42,7 +42,10 @@ class MountainImg {
         return this.y > 0 && this.height > 0 && this.width > 0;
     }
     displayInfoPopup() {
-        image(this.popup, this.x - 350, this.y - 500, 400, 300);
+        if (!popupIsOpen) {
+            image(this.popup, this.x - 350, this.y - 500, 400, 300);
+        }
+        popupIsOpen = true;
     }
     hideInfoPopup() {
         initMountains();
@@ -56,6 +59,7 @@ var canvasWidth;
 var cur_index = 2;
 var mainWindow;
 var stage;
+var popupIsOpen = false;
 
 function initMountains() {
     var startWidth = 300;
@@ -160,6 +164,7 @@ function draw() {
         // console.log('continuing animation');
         let resetCanvas = slideAllMountains();
         if (resetCanvas) {
+            popupIsOpen = false;
             continueAnimation = false;
             // initMountains();
             cur_index -= animationDirection;
