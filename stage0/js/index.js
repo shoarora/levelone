@@ -6,6 +6,7 @@ var div = document.getElementById('menu-buttons');
 
 function main() {
     var index = 0;
+    console.log(electron.remote.getGlobal('sharedObj').serverURL);
     function highlightOptions() {
 
         for (let i=0; i < div.children.length; i++) {
@@ -32,6 +33,14 @@ function main() {
             var pathToLoad = div.children[index].getAttribute('href');
             mainWindow.loadURL(url.format({
                 pathname: path.join(__dirname, '..', pathToLoad),
+                protocol: 'file:',
+                slashes: true
+            }));
+        }
+        if (event.key === 'v') {
+            var mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
+            mainWindow.loadURL(url.format({
+                pathname: path.join(__dirname, '../..', 'config.html'),
                 protocol: 'file:',
                 slashes: true
             }));

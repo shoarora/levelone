@@ -22,7 +22,7 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
-  global.sharedObj = {'mainWindow': mainWindow, 'stage': 0, 'numReps': 10};
+  global.sharedObj = {'mainWindow': mainWindow, 'stage': 0, 'numReps': 10, 'serverURL': 'http://myth3.stanford.edu:5000/'};
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 

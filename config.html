@@ -1,0 +1,18 @@
+<script>
+    const electron = require('electron')
+
+    function saveServerURL(url) {
+        console.log(url);
+        electron.remote.getGlobal('sharedObj').serverURL = url;
+        var mainWindow = elelectron.remote.getGlobal('sharedObj').mainWindow;
+        mainWindow.loadURL(url.format({
+            pathname: path.join(__dirname, 'stage0', 'index.html'),
+            protocol: 'file:',
+            slashes: true
+        }));
+    }
+</script>
+<form action='./stage0/index.html'>
+  server url: <input type="text" id='url' name="url"><br>
+  <input type="submit" value="Submit" onclick='saveServerURL(document.getElementById("url").value)'>
+</form>

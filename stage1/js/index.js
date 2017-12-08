@@ -36,6 +36,14 @@ function main() {
                 slashes: true
             }));
         }
+        if (event.key === 'b') {
+            var mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
+            mainWindow.loadURL(url.format({
+                pathname: path.join(__dirname, '../../stage0/index.html'),
+                protocol: 'file:',
+                slashes: true
+            }));
+        }
         highlightOptions();
     });
 }
