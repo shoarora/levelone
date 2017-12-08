@@ -27,12 +27,13 @@ function draw() {
 }
 
 document.addEventListener('keydown', event => {
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, '../new-move.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
+    if (event.key === 'j') {
+        mainWindow.loadURL(url.format({
+            pathname: path.join(__dirname, '../new-move.html'),
+            protocol: 'file:',
+            slashes: true
+        }));
+    }
 });
 
 exports.setup = setup;

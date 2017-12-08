@@ -181,7 +181,7 @@ function draw() {
 }
 
 document.addEventListener('keydown', event => {
-    if (event.key === 'j') {
+    if (event.key === 'a') {
         console.log(event.key);
         if (cur_index < mountains.length-1) {
             animationDirection = -1;
@@ -189,7 +189,7 @@ document.addEventListener('keydown', event => {
             var labels = document.getElementById('level-labels');
             labels.innerHTML = '';
         }
-    } else if (event.key === 'k') {
+    } else if (event.key === 'd') {
         console.log(event.key);
         if (cur_index > 0) {
             animationDirection = 1;
@@ -197,9 +197,9 @@ document.addEventListener('keydown', event => {
             var labels = document.getElementById('level-labels');
             labels.innerHTML = '';
         }
-    } else if (event.key === 'l') {
+    } else if (event.key === 'j') {
         mountains[cur_index].displayInfoPopup();
-    } else if (event.key === ';') {
+    } else if (event.key === 'k') {
         mainWindow.loadURL(url.format({
           pathname: path.join(__dirname, '../index.html'),
           protocol: 'file:',

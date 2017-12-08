@@ -21,13 +21,13 @@ function main() {
     }
     highlightOptions();
     document.addEventListener('keydown', event => {
-        if (event.key === 'j' && index < 4) {
+        if (event.key === 's' && index < 4) {
             index++;
         }
-        if (event.key === 'k' && index > 0) {
+        if (event.key === 'w' && index > 0) {
             index--;
         }
-        if (event.key === 'l') {
+        if (event.key === 'j') {
             var mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
             var pathToLoad = div.children[index].getAttribute('href');
             mainWindow.loadURL(url.format({

@@ -71,7 +71,7 @@ function draw() {
 
 document.addEventListener('keydown', event => {
     console.log(event.key, event.keyCode);
-    if (event.keyCode === 37) {
+    if (event.key === 'a') {
         if (!selectionSet && selection === 1) {
             selection = 0;
             needsRender = true;
@@ -80,7 +80,7 @@ document.addEventListener('keydown', event => {
             needsRender = true;
         }
     }
-    if (event.keyCode === 39) {
+    if (event.key === 'd') {
         if (!selectionSet && selection === 0) {
             selection = 1;
             needsRender = true;
@@ -108,9 +108,17 @@ document.addEventListener('keydown', event => {
             }));
         }
     }
-    if (event.key === 'k' && selectionAvailable) {
-        selectionSet = false;
-        needsRender = true;
+    if (event.key === 'k') {
+        if (selectionAvailable) {
+            selectionSet = false;
+            needsRender = true;
+        } else {
+            mainWindow.loadURL(url.format({
+                pathname: path.join(__dirname, '..', 'index.html'),
+                protocol: 'file:',
+                slashes: true
+            }));
+        }
     }
 });
 

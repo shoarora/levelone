@@ -20,11 +20,13 @@ function draw() {
 }
 
 document.addEventListener('keydown', event => {
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, '../solo-jj.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
+    if (event.key === 'j' || event.key === 'k') {
+        mainWindow.loadURL(url.format({
+            pathname: path.join(__dirname, '../solo-jj.html'),
+            protocol: 'file:',
+            slashes: true
+        }));
+    }
 });
 
 exports.setup = setup;

@@ -21,17 +21,24 @@ function main() {
     }
     highlightOptions();
     document.addEventListener('keydown', event => {
-        if (event.key === 'j' && index < 3) {
+        if (event.key === 's' && index < 3) {
             index++;
         }
-        if (event.key === 'k' && index > 0) {
+        if (event.key === 'w' && index > 0) {
             index--;
         }
-        if (event.key === 'l') {
+        if (event.key === 'j') {
             var mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
             var pathToLoad = div.children[index].getAttribute('href');
             mainWindow.loadURL(url.format({
                 pathname: path.join(__dirname, '..', pathToLoad),
+                protocol: 'file:',
+                slashes: true
+            }));
+        }
+        if (event.key === 'k') {
+            mainWindow.loadURL(url.format({
+                pathname: path.join(__dirname, '..', 'index.html'),
                 protocol: 'file:',
                 slashes: true
             }));

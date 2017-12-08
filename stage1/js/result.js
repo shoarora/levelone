@@ -28,12 +28,13 @@ function draw() {
 }
 
 document.addEventListener('keydown', event => {
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, '../level-up.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
+    if (event.key === 'j') {
+        mainWindow.loadURL(url.format({
+            pathname: path.join(__dirname, '../level-up.html'),
+            protocol: 'file:',
+            slashes: true
+        }));
+    }
 });
 
 exports.setup = setup;

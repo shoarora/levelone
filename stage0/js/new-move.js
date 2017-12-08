@@ -28,9 +28,9 @@ function draw() {
 
 document.addEventListener('keydown', event => {
     var pathToOpen;
-    if (event.key === 'j') {
+    if (event.key === 'k') {
         pathToOpen = 'progress.html';
-    } else if (event.key === 'k') {
+    } else if (event.key === 'j') {
         pathToOpen = 'tutorial.html';
     }
     if (pathToOpen) {

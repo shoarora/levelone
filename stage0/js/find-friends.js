@@ -62,19 +62,19 @@ function draw() {
 
 document.addEventListener('keydown', event => {
     console.log(event.key, event.keyCode);
-    if (event.keyCode === 37 && buttonIndex === 1) {
+    if (event.key === 'a' && buttonIndex === 1) {
         buttonIndex--;
         needsRender = true;
     }
-    if (event.keyCode === 38 && profileIndex === 1) {
+    if (event.key === 's' && profileIndex === 1) {
         profileIndex--;
         needsRender = true;
     }
-    if (event.keyCode === 39 && buttonIndex === 0) {
+    if (event.key === 'd' && buttonIndex === 0) {
         buttonIndex++;
         needsRender = true;
     }
-    if (event.keyCode === 40 && profileIndex === 0) {
+    if (event.key === 'w' && profileIndex === 0) {
         profileIndex++;
         needsRender = true;
     }
@@ -102,6 +102,13 @@ document.addEventListener('keydown', event => {
                 slashes: true
             }));
         }
+    }
+    if (event.key === 'k') {
+        mainWindow.loadURL(url.format({
+            pathname: path.join(__dirname, '..', 'index.html'),
+            protocol: 'file:',
+            slashes: true
+        }));
     }
 });
 
