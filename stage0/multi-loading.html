@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Loading</title>
+        <style>
+            body {
+                height: 774px;
+                width: 1280px;
+                background-image: url("img/loading.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='canvas-container'>
+
+        </div>
+        <script>
+            const electron = require('electron');
+            const url = require('url');
+            const path = require('path');
+            var mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
+            setTimeout(function() {
+                mainWindow.loadURL(url.format({
+                    pathname: path.join(__dirname, 'multiplay.html'),
+                    protocol: 'file:',
+                    slashes: true
+                }));
+            }, 3000);
+        </script>
+    </body>
+</html>

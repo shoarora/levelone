@@ -60,6 +60,7 @@ class Challenge {
         this.type = type;
         this.player1 = new Player(player1, type, player1Name, numReps);
         this.player2 = new Player(player2, type, player2Name, numReps);
+        this.player2.repsLeft += 8;
         this.numReps = numReps;
         this.timeLeft = timeLimit;
         this.needsRender = false;
@@ -256,9 +257,9 @@ function setup() {
         'pink',
         'green',
         'You',
-        'Squatch',
-        electron.remote.getGlobal('sharedObj').numReps,
-        120
+        'Edmund19',
+        12,
+        45
     );
 
     function runTimer() {

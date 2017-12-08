@@ -84,7 +84,7 @@ document.addEventListener('keydown', event => {
 
         if (profileIndex === 0) {
             if (buttonIndex === 0) {
-                pathToOpen = 'multi-select.html';
+                pathToOpen = 'multi-loading.html';
             } else {
                 pathToOpen = 'edmund.html';
             }
