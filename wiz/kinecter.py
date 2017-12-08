@@ -14,4 +14,8 @@ if __name__ == '__main__':
                 new_p1 = 2
             if new_p1 != p1:
                 p1 = new_p1
-                requests.get('http://myth14.stanford.edu:5000/update/'+str(p1))
+                # requests.get('http://myth14.stanford.edu:5000/update/'+str(p1))
+                print(p1)
+
+
+#kinect | python kinecter.py

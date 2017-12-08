@@ -22,8 +22,8 @@ def get_game_state():
 @app.route('/update/<p1>')
 def update_p1_score(p1):
     response['player1State'] = int(p1)
-
+    return json.dumps({})
 
 if __name__ == "__main__":
-    thread.start_new_thread(app.run, (), {'host': '0.0.0.0'})
-    update_p1_score()
+    #thread.start_new_thread(app.run, (), {'host': '0.0.0.0'})
+    app.run(host='0.0.0.0')
