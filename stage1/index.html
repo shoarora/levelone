@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Level One</title>
+    <style>
+        body {
+            height: 774px;
+            width: 1280px;
+            background-image: url("img/HomeBlank.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        #menu-buttons {
+            margin-top: 90px;
+            margin-right: 55px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 300px;
+            width: 370px;
+            float: right;
+        }
+        div#menu-buttons a {
+            font-size: 45px;
+            text-decoration: none;
+            font-family: sans-serif;
+        }
+        div#menu-buttons a:hover {
+
+        }
+        a span {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='menu-buttons'>
+        <a href="select-workout.html">Solo Workout</a>
+        <a href="multiplayer.html">Multiplayer</a>
+        <a href="friends.html">Friends</a>
+        <a href="progress.html">Progress</a>
+        <a href="">Items <span>(Coming Soon!)</span></a>
+    </div>
+    <script>
+        const index = require('./js/index.js');
+        index.main();
+    </script>
+</body>
+
+</html>

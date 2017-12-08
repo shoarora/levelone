@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Progress</title>
+        <style>
+            #level-labels {
+                display: flex;
+                justify-content: space-around;
+                color: rgb(245, 245, 245);
+                font-size: 35;
+                font-family: sans-serif;
+                margin-top: -60px;
+                width: 1280px;
+            }
+            #quick-stats {
+                visibility: hidden;
+            }
+            body {
+                height: 774px;
+                width: 1280px;
+            }
+            .progress {
+                background-image: url("img/progressBackground.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+        </style>
+    </head>
+    <body class='progress'>
+        <div id='quick-stats'>
+            <h1>Your Progress</h1>
+
+            <p>
+                Hours worked out: 30
+            </p>
+            <p>
+                Days without a break: 5
+            </p>
+            <p>
+                Total workouts: 30
+            </p>
+        </div>
+        <div id='canvas-container'>
+
+        </div>
+        <script>
+            require('../js/p5/p5.min.js')
+            const p5 = require('./js/progress.js');
+
+            var setup = p5.setup;
+            var draw = p5.draw;
+        </script>
+        <div id='level-labels'>
+
+        </div>
+    </body>
+</html>
