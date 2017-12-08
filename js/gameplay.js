@@ -261,10 +261,8 @@ class Challenge {
     }
     end() {
         var nextPage;
-        if (this.isSolo) {
-            nextPage = 'SOLO';
-        } else {
-            nextPage = 'MULTI';
+        if (!this.isSolo) {
+            nextPage = 'multi';
         }
         if (this.player1.points > this.player2.points) {
             nextPage += 'win.html';

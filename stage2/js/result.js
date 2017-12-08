@@ -30,7 +30,7 @@ function draw() {
 document.addEventListener('keydown', event => {
     if (event.key === 'j') {
         mainWindow.loadURL(url.format({
-            pathname: path.join(__dirname, '../level-up.html'),
+            pathname: path.join(__dirname, '../progress.html'),
             protocol: 'file:',
             slashes: true
         }));
