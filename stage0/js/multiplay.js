@@ -17,6 +17,7 @@ class Player {
         this.repsLeft = numReps;
         this.state = 0;
         this.compliment = null;
+        this.reached2 = false;
 
         this.sprites = [null, null, null];
         var self = this;
@@ -25,6 +26,14 @@ class Player {
             loadImage(path.join('img', type, 'sprites', sprite, i.toString()+'.png'), function(img) {
                 self.sprites[j] = img;
             });
+        }
+    }
+    updateState(newState) {
+        this.state = newState;
+        if (newState === 0) {
+            this.reached2 = false;
+        } else if (newState === 2) {
+            this.reached2 = true;
         }
     }
 }
@@ -86,7 +95,7 @@ class Challenge {
             if (!err) {
                 body = JSON.parse(body);
                 if (self.player1.state !== body.player1State) {
-                    if (body.player1State === 0) {
+                    if (body.player1State === 0 && self.player1.reached2) {
                         // 1 rep completed
                         self.player1.repsLeft--;
                         if (Math.random() > 0.0) {
@@ -100,16 +109,16 @@ class Challenge {
                             }, 800);
                         }
                     }
-                    self.player1.state = body.player1State;
+                    self.player1.updateState(body.player1State);
                     self.needsRender = true;
                     console.log('p1 state changed');
                 }
                 if (self.player2.state !== body.player2State) {
-                    if (body.player2State === 0) {
+                    if (body.player2State === 0 && self.player1.reached2) {
                         // 1 rep completed
                         self.player2.repsLeft--;
                     }
-                    self.player2.state = body.player2State;
+                    self.player2.updateState(body.player2State);
                     self.needsRender = true;
                     console.log('p2 state changed');
                 }
