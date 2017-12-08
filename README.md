@@ -31,3 +31,4 @@ In demonstration, we used a wiimote and the mac application `Joystick Mapper` to
 
 
 ## Limitations
+We hardcoded a lot of data, such as the ability to add friends, starting level, and a few rounds of game play.
