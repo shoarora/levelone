@@ -201,7 +201,11 @@ class Challenge {
         textSize(50);
         textStyle('BOLD');
         fill(255, 255, 255);
-        text(this.player1.repsLeft, 145, 90);
+        var adjustment1 = 0;
+        if (this.player1.repsLeft < 10) {
+            adjustment1 = textWidth(this.player1.repsLeft)/2;
+        }
+        text(this.player1.repsLeft, 145 + adjustment1, 90);
 
         // Player 2
         barHeight = barMaxHeight * (1 - this.player2.repsLeft / this.numReps);
@@ -212,7 +216,11 @@ class Challenge {
         textSize(50);
         textStyle('BOLD');
         fill(255, 255, 255);
-        text(this.player2.repsLeft, 1066, 92);
+        var adjustment2 = 0;
+        if (this.player2.repsLeft < 10) {
+            adjustment2 = textWidth(this.player2.repsLeft)/2;
+        }
+        text(this.player2.repsLeft, 1066 + adjustment2, 92);
     }
     renderSprites() {
         image(this.ground, 0, 624, 1277, 150);
@@ -242,14 +250,14 @@ class Challenge {
         fill(255, 255, 255);
         var adjustment1 = 0;
         var adjustment2 = 0;
-        if (this.player1.points > 9) {
-            adjustment1 += 15;
-        }
-        if (this.player2.points > 9) {
-            adjustment2 += 15;
-        }
-        text(this.player1.points, 220 + adjustment1, 720);
-        text(this.player2.points, 1150 + adjustment2, 720);
+        // if (this.player1.points > 9) {
+        //     adjustment1 += 15;
+        // }
+        // if (this.player2.points > 9) {
+        //     adjustment2 += 15;
+        // }
+        text(this.player1.points | 0, 220 + adjustment1, 720);
+        text(this.player2.points | 0, 1150 + adjustment2, 720);
     }
     renderCountdown() {
         fill(255, 255, 255, 220);
