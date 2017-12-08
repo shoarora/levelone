@@ -96,6 +96,7 @@ class Challenge {
                 if (self.player1.state !== body.player1State) {
                     if (body.player1State === 0 && self.player1.reached2) {
                         // 1 rep completed
+                        self.player1.points += 30.0 / self.numReps;
                         self.player1.repsLeft--;
                         if (Math.random() > 0.0) {
                             // give user a compliment
@@ -115,6 +116,7 @@ class Challenge {
                 if (self.player2.state !== body.player2State) {
                     if (body.player2State === 0 && self.player1.reached2) {
                         // 1 rep completed
+                        self.player2.points += 30.0 / self.numReps;
                         self.player2.repsLeft--;
                     }
                     self.player2.updateState(body.player2State);
