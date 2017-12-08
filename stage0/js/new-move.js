@@ -5,6 +5,7 @@ const path = require('path');
 
 var numReps = 20;
 var needsRender = true;
+var selected = 0;
 var mainWindow;
 var canvasHeight;
 var canvasWidth;
@@ -23,14 +24,30 @@ function setup() {
 }
 
 function draw() {
-
+    var x;
+    if (selected === 0) {
+        x = 422;
+    } else {
+        x = 676;
+    }
+    stroke(255, 255, 255);
+    noFill();
+    strokeWeight(4);
+    clear();
+    rect(x, 564, 185, 60);
 }
 
 document.addEventListener('keydown', event => {
+    if (event.key === 'a') {
+        selected = 0;
+    }
+    if (event.key === 'd') {
+        selected = 1;
+    }
     var pathToOpen;
-    if (event.key === 'k') {
+    if (event.key === 'k'|| (event.key === 'j' && selected === 1)) {
         pathToOpen = 'progress.html';
-    } else if (event.key === 'j') {
+    } else if (event.key === 'j' && selected === 0) {
         pathToOpen = 'tutorial.html';
     }
     if (pathToOpen) {
