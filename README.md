@@ -5,8 +5,9 @@ CS147 Hi-Fi Prototype
 Built with electron, p5.js, Microsift Kinect for Windows SDK, and flask (python)
 
 ## Install Instructions
-You can either get the prebuilt version of the app [here](web.stanford.edu/~shoarora/cs147),
-or you can clone this repo and run it with node.js as follows:
+You can either get the prebuilt version of the app [here (available for mac only)](http://web.stanford.edu/class/cs147/projects/health/levelone/assignments/Level%20One.zip),
+or you can clone this repo and run it with node.js (should run on anything but we haven't tried,
+but also more stable on mac) as follows:
 
 run `npm install` first time
 run `npm start` to start
@@ -33,7 +34,7 @@ run /KinectGestures/bin/x86/Debug/kinecter.py to launch.
 ## Controls
 The game was intended to be demonstrated with a video game controller.  As such, to use it with a keyboard, use `w-a-s-d` for the arrow keys, `j` as your conventional A/forward button, and `k` as your B/back button.
 
-In demonstration, we used a wiimote and the mac application `Joystick Mapper` to turn the wiimote's button clicks into the above keystrokes.  
+In demonstration, we can use a wiimote and the mac application `Joystick Mapper` to turn the wiimote's button clicks into the above keystrokes.  
 
 
 ## Limitations
