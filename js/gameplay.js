@@ -80,6 +80,7 @@ class Challenge {
     constructor(type, player1, player2, player1Name, player2Name, numReps,
                 timeLimit, canvasWidth, canvasHeight, mainWindow, dirname) {
         this.type = type;
+        this.isSolo = player2 === 'yeti';
         this.player1 = new Player(player1, type, player1Name, numReps);
         this.player2 = new Player(player2, type, player2Name, numReps);
         this.numReps = numReps;
@@ -260,12 +261,17 @@ class Challenge {
     }
     end() {
         var nextPage;
-        if (this.player1.points > this.player2.points) {
-            nextPage = 'win.html';
-        } else if (this.player1.points < this.player2.points) {
-            nextPage = 'lose.html';
+        if (this.isSolo) {
+            nextPage = 'SOLO';
         } else {
-            nextPage = 'win.html';
+            nextPage = 'MULTI';
+        }
+        if (this.player1.points > this.player2.points) {
+            nextPage += 'win.html';
+        } else if (this.player1.points < this.player2.points) {
+            nextPage += 'lose.html';
+        } else {
+            nextPage += 'tie.html';
         }
         this.mainWindow.loadURL(url.format({
             pathname: path.join(this.dirname, '..', nextPage),
