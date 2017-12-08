@@ -28,7 +28,7 @@ Once you have the server running (we did it on Stanford's myth clusters), set th
 Note: The kinect only works with windows computers.
 Instal the Microsift Kinect for Windows SDK and the necessary Kinect Drivers. You can check if you have done this successfully by opening the SDK Kinect Browser 2.0 and running the kinect configuration verifier. Warnings about the USB controller can sometimes be ignored.
 
-run /SquatGesture/bin/x86/Debug/kinecter.py to launch.
+run /KinectGestures/bin/x86/Debug/kinecter.py to launch.
 
 ## Controls
 The game was intended to be demonstrated with a video game controller.  As such, to use it with a keyboard, use `w-a-s-d` for the arrow keys, `j` as your conventional A/forward button, and `k` as your B/back button.
