@@ -41,6 +41,9 @@ class Player {
             return mod;
         } else {
             var mod = timeLeft % 2;
+            if (mod === 1) {
+                mod = 2;
+            }
             return mod;
         }
     }

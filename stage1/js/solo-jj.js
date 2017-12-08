@@ -26,7 +26,7 @@ function setup() {
     challenge = new Challenge(
         'jj',
         'pink',
-        'green',
+        'yeti',
         'You',
         'Squatch',
         electron.remote.getGlobal('sharedObj').numReps,
