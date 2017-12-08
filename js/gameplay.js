@@ -1,13 +1,9 @@
 const electron = require('electron');
-const request = require('request');
 const url = require('url');
 const path = require('path');
 const player = require('play-sound')(opts = {});
+const request = require('request');
 
-var mainWindow;
-var canvasWidth;
-var canvasHeight;
-var challenge;
 
 class Player {
     constructor(sprite, type, name, numReps) {
@@ -17,14 +13,35 @@ class Player {
         this.repsLeft = numReps;
         this.state = 0;
         this.compliment = null;
+        this.reached2 = false;
 
         this.sprites = [null, null, null];
         var self = this;
         for (let i=0; i < 3; i++) {
             let j = i;
-            loadImage(path.join('../img', type, 'sprites', sprite, i.toString()+'.png'), function(img) {
+            loadImage(path.join('img', type, 'sprites', sprite, i.toString()+'.png'), function(img) {
                 self.sprites[j] = img;
             });
+        }
+    }
+    updateState(newState) {
+        this.state = newState;
+        if (newState === 0) {
+            this.reached2 = false;
+        } else if (newState === 2) {
+            this.reached2 = true;
+        }
+    }
+    getComputerState(timeLeft, type) {
+        if (type === 'squats') {
+            var mod = timeLeft % 4;
+            if (mod === 3) {
+                mod = 1;
+            }
+            return mod;
+        } else {
+            var mod = timeLeft % 2;
+            return mod;
         }
     }
 }
@@ -56,7 +73,8 @@ class Compliment {
 }
 
 class Challenge {
-    constructor(type, player1, player2, player1Name, player2Name, numReps, timeLimit) {
+    constructor(type, player1, player2, player1Name, player2Name, numReps,
+                timeLimit, canvasWidth, canvasHeight, mainWindow, dirname) {
         this.type = type;
         this.player1 = new Player(player1, type, player1Name, numReps);
         this.player2 = new Player(player2, type, player2Name, numReps);
@@ -64,8 +82,12 @@ class Challenge {
         this.timeLeft = timeLimit;
         this.needsRender = false;
         this.requestInProgress = false;
-
-        this.ground = loadImage(path.join('../img', type, 'ground.png'));
+        this.countdown = 5;
+        this.canvasWidth = canvasWidth;
+        this.canvasHeight = canvasHeight;
+        this.mainWindow = mainWindow;
+        this.dirname = dirname;
+        this.ground = loadImage(path.join('img', type, 'ground.png'));
     }
     timeLeftInMinutes() {
         var min = Math.floor(this.timeLeft / 60);
@@ -79,12 +101,14 @@ class Challenge {
     fetchState() {
         this.requestInProgress = true;
         var self = this;
-        request('http://localhost:5000/game/state', (err, res, body) => {
+        // request('http://localhost:5000/game/state', (err, res, body) => {
+        request('http://myth3.stanford.edu:5000/game/state', (err, res, body) => {
             if (!err) {
                 body = JSON.parse(body);
                 if (self.player1.state !== body.player1State) {
-                    if (body.player1State === 0) {
+                    if (body.player1State === 0 && self.player1.reached2) {
                         // 1 rep completed
+                        self.player1.points += 30.0 / self.numReps;
                         self.player1.repsLeft--;
                         if (Math.random() > 0.0) {
                             // give user a compliment
@@ -97,25 +121,30 @@ class Challenge {
                             }, 800);
                         }
                     }
-                    self.player1.state = body.player1State;
+                    self.player1.updateState(body.player1State);
                     self.needsRender = true;
                     console.log('p1 state changed');
                 }
+                body.player2State = this.player2.getComputerState(this.timeLeft, this.type);
                 if (self.player2.state !== body.player2State) {
-                    if (body.player2State === 0) {
+                    if (body.player2State === 0 && self.player2.reached2) {
                         // 1 rep completed
+                        self.player2.points += 30.0 / self.numReps;
                         self.player2.repsLeft--;
                     }
-                    self.player2.state = body.player2State;
+                    self.player2.updateState(body.player2State);
                     self.needsRender = true;
                     console.log('p2 state changed');
                 }
-
-                self.requestInProgress = false;
             } else {
                 console.log('error fetching state');
-                self.requestInProgress = false;
             }
+            if (this.timeLeft === 1 ||
+                this.player1.repsLeft === 1 ||
+                this.player2.repsLeft === 1) {
+                this.end();
+            }
+            self.requestInProgress = false;
         });
     }
     renderScreen() {
@@ -125,6 +154,11 @@ class Challenge {
         this.renderProgressBars();
         this.renderSprites();
         this.renderPoints();
+
+        if (this.countdown > 0) {
+            this.renderCountdown();
+        }
+
         if (this.player1.compliment === null) {
             console.log('done animating');
             this.needsRender = false;
@@ -135,7 +169,11 @@ class Challenge {
         textSize(64);
         textStyle('BOLD');
         fill(0, 170, 235);
-        text(this.numReps.toString(), 515, 195);
+        if (this.type === 'squats') {
+            text(this.numReps.toString(), 515, 195);
+        } else {
+            text(this.numReps.toString(), 390, 190);
+        }
     }
     renderTimeLeft() {
         textFont('sans-serif');
@@ -205,66 +243,33 @@ class Challenge {
             adjustment2 += 15;
         }
         text(this.player1.points, 220 + adjustment1, 720);
-        text(this.player1.points, 1150 + adjustment2, 720);
+        text(this.player2.points, 1150 + adjustment2, 720);
     }
-}
+    renderCountdown() {
+        fill(255, 255, 255, 220);
+        rect(0, 0, this.canvasWidth, this.canvasHeight);
 
-function setup() {
-    mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
-    console.log(electron.remote.getGlobal('sharedObj').stage);
-    const size = mainWindow.getSize();
-    console.log(size);
-    canvasWidth = size[0];
-    canvasHeight = size[1];
-    var canvas = createCanvas(canvasWidth, canvasHeight);
-    canvas.parent('canvas-container');
-    challenge = new Challenge(
-        'squats',
-        'pink',
-        'green',
-        'You',
-        'Squatch',
-        20,
-        120
-    );
-
-    function runTimer() {
-        challenge.timeLeft--;
-        challenge.needsRender = true;
+        fill(0, 170, 235);
+        textSize(130);
+        text(this.countdown, this.canvasWidth/2 - textWidth(this.countdown)/2, this.canvasHeight/2);
     }
-    setInterval(runTimer, 1000);
-    // var audio = player.play('foo.mp3', function(err) {
-    //     if (err && !err.killed) throw err;
-    // });
-    // setTimeout(function() {
-    //     audio.kill();
-    // }, 10000);
-}
-
-var firstTime = true;
-
-function draw() {
-    if (!challenge.requestInProgress) {
-        if (firstTime) {
-            console.log('fetching 1st state');
-            challenge.requestInProgress = true;
-            firstTime = false;
-            challenge.fetchState();
+    end() {
+        var nextPage;
+        if (this.player1.points > this.player2.points) {
+            nextPage = 'win.html';
+        } else if (this.player1.points < this.player2.points) {
+            nextPage = 'lose.html';
         } else {
-            // console.log('fetching state');
-            challenge.fetchState();
+            nextPage = 'win.html';
         }
-    }
-
-    if (challenge.needsRender) {
-        clear();
-        challenge.renderScreen();
+        this.mainWindow.loadURL(url.format({
+            pathname: path.join(this.dirname, '..', nextPage),
+            protocol: 'file:',
+            slashes: true
+        }));
     }
 }
 
-document.addEventListener('keydown', event => {
-
-});
-
-exports.setup = setup;
-exports.draw = draw;
+exports.Player = Player;
+exports.Compliment = Compliment;
+exports.Challenge = Challenge;
