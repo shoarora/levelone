@@ -181,7 +181,7 @@ function draw() {
 }
 
 document.addEventListener('keydown', event => {
-    if (event.key === 'a') {
+    if (event.key === 'd') {
         console.log(event.key);
         if (cur_index < mountains.length-1) {
             animationDirection = -1;
@@ -189,7 +189,7 @@ document.addEventListener('keydown', event => {
             var labels = document.getElementById('level-labels');
             labels.innerHTML = '';
         }
-    } else if (event.key === 'd') {
+    } else if (event.key === 'a') {
         console.log(event.key);
         if (cur_index > 0) {
             animationDirection = 1;

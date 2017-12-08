@@ -53,7 +53,7 @@ class MountainImg {
 var mountains;
 var canvasHeight;
 var canvasWidth;
-var cur_index = 2;
+var cur_index = 3;
 var mainWindow;
 var stage;
 
@@ -74,18 +74,20 @@ function initMountains() {
             popupPath = 'img/PopupLeft1.png';
         } else if (i === 1) {
             popupPath = 'img/PopupLeft2.png';
-        } else if (i > 2) {
+        } else if (i === 2) {
+            popupPath = 'img/PopupLeft3.png';
+        } else if (i > 3) {
             popupPath = 'img/LockedLevelLeft.png';
         }
-        if (i < 2) {
-            startX -= (2 - i) * center * 3 / 4;
-            curStartWidth -= (2 - i) * center * 3 / 4 / 2;
-            curStartHeight -= (2 - i) * center * 3 / 4 / 2;
+        if (i < cur_index) {
+            startX -= (cur_index - i) * center * 3 / 4;
+            curStartWidth -= (cur_index - i) * center * 3 / 4 / 2;
+            curStartHeight -= (cur_index - i) * center * 3 / 4 / 2;
             img_path = 'img/CompletedMountain.png'
-        } else if (i > 2) {
-            startX += (i - 2) * center * 3 / 4;
-            curStartWidth += (i - 2) * center * 3 / 4 / 2;
-            curStartHeight += (i - 2) * center * 3 / 4 / 2;
+        } else if (i > cur_index) {
+            startX += (i - cur_index) * center * 3 / 4;
+            curStartWidth += (i - cur_index) * center * 3 / 4 / 2;
+            curStartHeight += (i - cur_index) * center * 3 / 4 / 2;
             img_path = 'img/LockedMountain.png'
         }
 
@@ -181,7 +183,7 @@ function draw() {
 }
 
 document.addEventListener('keydown', event => {
-    if (event.key === 'a') {
+    if (event.key === 'd') {
         console.log(event.key);
         if (cur_index < mountains.length-1) {
             animationDirection = -1;
@@ -189,7 +191,7 @@ document.addEventListener('keydown', event => {
             var labels = document.getElementById('level-labels');
             labels.innerHTML = '';
         }
-    } else if (event.key === 'd') {
+    } else if (event.key === 'a') {
         console.log(event.key);
         if (cur_index > 0) {
             animationDirection = 1;
