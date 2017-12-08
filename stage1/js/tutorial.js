@@ -3,19 +3,12 @@ const request = require('request');
 const url = require('url');
 const path = require('path');
 
-var numReps = 20;
-var needsRender = true;
-var mainWindow;
+var mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
 var canvasHeight;
 var canvasWidth;
-var stage;
 
 function setup() {
-    mainWindow = electron.remote.getGlobal('sharedObj').mainWindow;
-    stage = electron.remote.getGlobal('sharedObj').stage;
-    console.log(electron.remote.getGlobal('sharedObj').stage);
-    const size = mainWindow.getSize();
-    console.log(size);
+    const size = mainWindow.getSize()
     canvasWidth = size[0];
     canvasHeight = size[1];
     var canvas = createCanvas(canvasWidth, canvasHeight);
@@ -28,11 +21,10 @@ function draw() {
 
 document.addEventListener('keydown', event => {
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, '../find-friends.html'),
+        pathname: path.join(__dirname, '../solo-jj.html'),
         protocol: 'file:',
         slashes: true
     }));
-
 });
 
 exports.setup = setup;

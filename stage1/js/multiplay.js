@@ -82,7 +82,7 @@ class Challenge {
         this.requestInProgress = true;
         var self = this;
         // request('http://localhost:5000/game/state', (err, res, body) => {
-        request('http://myth14.stanford.edu:5000/game/state', (err, res, body) => {
+        request('http://myth3.stanford.edu:5000/game/state', (err, res, body) => {
             if (!err) {
                 body = JSON.parse(body);
                 if (self.player1.state !== body.player1State) {

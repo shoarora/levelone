@@ -18,7 +18,7 @@ function createWindow () {
   // mainWindow.maximize();
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'stage0', 'index.html'),
+    pathname: path.join(__dirname, 'stage1', 'index.html'),
     protocol: 'file:',
     slashes: true
   }))

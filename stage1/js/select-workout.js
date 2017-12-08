@@ -3,7 +3,7 @@ const request = require('request');
 const url = require('url');
 const path = require('path');
 
-var selectionAvailable = false;
+var selectionAvailable = true;
 var selectionSet = !selectionAvailable;
 var selection = 0;
 var numReps = 20;
@@ -95,8 +95,14 @@ document.addEventListener('keydown', event => {
             needsRender = true;
         } else {
             electron.remote.getGlobal('sharedObj').numReps = numReps;
+            var pathToOpen;
+            if (selection === 0) {
+                pathToOpen = 'solos-squats.html';
+            } else if (selection === 1) {
+                pathToOpen = 'solo-jj.html';
+            }
             mainWindow.loadURL(url.format({
-                pathname: path.join(__dirname, '../solo-squats.html'),
+                pathname: path.join(__dirname, '..', pathToOpen),
                 protocol: 'file:',
                 slashes: true
             }));

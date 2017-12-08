@@ -60,7 +60,6 @@ class Challenge {
         this.type = type;
         this.player1 = new Player(player1, type, player1Name, numReps);
         this.player2 = new Player(player2, type, player2Name, numReps);
-        this.player2.repsLeft += 8;
         this.numReps = numReps;
         this.timeLeft = timeLimit;
         this.needsRender = false;
@@ -146,7 +145,7 @@ class Challenge {
         textSize(64);
         textStyle('BOLD');
         fill(0, 170, 235);
-        text(this.numReps.toString(), 515, 195);
+        text(this.numReps.toString(), 390, 190);
     }
     renderTimeLeft() {
         textFont('sans-serif');
@@ -253,13 +252,13 @@ function setup() {
     var canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.parent('canvas-container');
     challenge = new Challenge(
-        'squats',
+        'jj',
         'pink',
         'green',
         'You',
-        'Edmund19',
-        12,
-        45
+        'Squatch',
+        electron.remote.getGlobal('sharedObj').numReps,
+        120
     );
 
     function runTimer() {

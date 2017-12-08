@@ -27,11 +27,19 @@ function draw() {
 }
 
 document.addEventListener('keydown', event => {
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, '../..', 'stage'+stage.toString(), 'progress.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
+    var pathToOpen;
+    if (event.key === 'j') {
+        pathToOpen = 'progress.html';
+    } else if (event.key === 'k') {
+        pathToOpen = 'tutorial.html';
+    }
+    if (pathToOpen) {
+        mainWindow.loadURL(url.format({
+            pathname: path.join(__dirname, '../..', 'stage'+stage.toString(), pathToOpen),
+            protocol: 'file:',
+            slashes: true
+        }));
+    }
 });
 
 exports.setup = setup;
