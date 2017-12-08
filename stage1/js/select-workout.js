@@ -119,7 +119,7 @@ document.addEventListener('keydown', event => {
             if (selection === 0) {
                 pathToLoad = 'solo-squats.html';
             } else {
-                pathToLoad = 'solo-jj.html';
+                pathToLoad = 'tutorial.html';
             }
             mainWindow.loadURL(url.format({
                 pathname: path.join(__dirname, '..', pathToLoad),
