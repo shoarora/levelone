@@ -34,7 +34,7 @@ run /KinectGestures/bin/x86/Debug/kinecter.py to launch.
 ## Controls
 The game was intended to be demonstrated with a video game controller.  As such, to use it with a keyboard, use `w-a-s-d` for the arrow keys, `j` as your conventional A/forward button, and `k` as your B/back button.
 
-In demonstration, we can use a wiimote and the mac application `Joystick Mapper` to turn the wiimote's button clicks into the above keystrokes.  
+In demonstration, we can use a Xbox 1 controller and the mac application `Enjoy2` to turn the Xbox 1 controller's button clicks into the above keystrokes.  
 
 
 ## Limitations
