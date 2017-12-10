@@ -266,6 +266,11 @@ class Challenge {
         fill(0, 170, 235);
         textSize(130);
         text(this.countdown, this.canvasWidth/2 - textWidth(this.countdown)/2, this.canvasHeight/2);
+
+        textSize(40);
+        var kinectText = 'Make sure you are set up in front of the Kinect';
+        fill(0, 0, 0);
+        text(kinectText, this.canvasWidth/2 - textWidth(kinectText)/2, this.canvasHeight/2 + 200);
     }
     end() {
         var nextPage = '';
