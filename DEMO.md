@@ -1,6 +1,8 @@
 # How to work stuff for demos
 
 ## The app
+`w-a-s-d` are arrow keys `j` is select, `k` is back
+
 The app has hardcoded 3 rounds of gameplay.  After that, the progress things
 stop updating.  To revert back to the first round of game play, press `b` from
 the home screen.
